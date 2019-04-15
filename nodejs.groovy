@@ -1,9 +1,13 @@
 job('Build_Nodejs_Project') {
     scm {
-        git('https://github.com/manfer993/portafolio.git') {  node -> // is hudson.plugins.git.GitSCM
+        git{  node -> // is hudson.plugins.git.GitSCM
             node / gitConfigName('manfer993')
             node / gitConfigEmail('manfer93@gmail.com')
-            branch('development')
+            remote {
+                name('origin')
+                url('https://github.com/manfer993/portafolio.git')
+            }
+            branchs('development')
         }
     }
     triggers {
