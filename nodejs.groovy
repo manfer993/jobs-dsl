@@ -5,7 +5,7 @@ job('Build_Nodejs_Project') {
                 name('origin')
                 url('https://github.com/manfer993/portafolio.git')
             }
-            branchs('development')
+            branch('development')
         }
     }
     triggers {
