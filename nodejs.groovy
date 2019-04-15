@@ -16,8 +16,9 @@ job('Build_Nodejs_Project') {
     steps {
         shell("npm install @angular/cli")
         shell("npm install")
-        withSonarQubeEnv('sonarqube 3.3.0') {
-          sh 'sonar-scanner'
+        def scannerHome = tool 'sonarqube 3.3.0'
+        withSonarQubeEnv('sonarqube_dev') {
+            sh "${scannerHome}/bin/sonar-scanner"
         }
     }
 }
