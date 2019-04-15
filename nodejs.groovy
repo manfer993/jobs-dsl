@@ -1,8 +1,9 @@
-job('NodeJS') {
+job('Build_Nodejs_Project') {
     scm {
-        git('git://github.com/wardviaene/docker-demo.git') {  node -> // is hudson.plugins.git.GitSCM
+        git('https://github.com/manfer993/portafolio.git') {  node -> // is hudson.plugins.git.GitSCM
             node / gitConfigName('manfer993')
             node / gitConfigEmail('manfer93@gmail.com')
+            branch('development')
         }
     }
     triggers {
@@ -13,6 +14,7 @@ job('NodeJS') {
                          // Manage Jenkins -> Configure Global Tools -> NodeJS Installations -> Name
     }
     steps {
+        shell("npm install @angular/cli")
         shell("npm install")
     }
 }
