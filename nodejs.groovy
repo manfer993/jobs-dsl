@@ -1,14 +1,12 @@
 job('Build_Nodejs_Project') {
     scm {
-        git{
-            remote {
-                name('origin')
-                url('https://github.com/manfer993/portafolio.git')
-            }
-            branch('development')
+        git('https://github.com/manfer993/portafolio.git','development'){ node -> // is hudson.plugins.git.GitSCM
+            node / gitConfigName('manfer993')
+            node / gitConfigEmail('manfer93@gmail.com')
         }
     }
     triggers {
+        githubPush()
         scm('H/5 * * * *')
     }
     wrappers {
@@ -18,5 +16,8 @@ job('Build_Nodejs_Project') {
     steps {
         shell("npm install @angular/cli")
         shell("npm install")
+        withSonarQubeEnv('SonarQube Scanner') {
+          sh 'sonar-scanner'
+        }
     }
 }
