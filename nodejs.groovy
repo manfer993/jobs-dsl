@@ -1,14 +1,16 @@
 job('Deploy_Nodejs_Project') {
     scm {
-        git('https://github.com/manfer993/portafolio.git','development'){ node -> // is hudson.plugins.git.GitSCM
+        // git('https://github.com/manfer993/portafolio.git','development'){ node -> // is hudson.plugins.git.GitSCM
+        //     node / gitConfigName('manfer993')
+        //     node / gitConfigEmail('manfer93@gmail.com')
+        // }
+        git(){ node -> // is hudson.plugins.git.GitSCM
             node / gitConfigName('manfer993')
             node / gitConfigEmail('manfer93@gmail.com')
-        }
-        git(){ 
-            // remote {
-            //     name('origin')
-            //     url('https://github.com/manfer993/portafolio.git')
-            // }
+            remote {
+                name('origin')
+                url('https://github.com/manfer993/portafolio.git')
+            }
             remote {
                 name('heroku')
                 url('https://git.heroku.com/ci-node-app.git')
