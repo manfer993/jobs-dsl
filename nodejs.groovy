@@ -1,6 +1,4 @@
-job(name: "deploy-app-heroku",
-    description: "update de app into heroku. To be used when have a change in development branch",
-    emails: ["manfer93@example.com"]) {
+job('deploy-app-heroku') {
     scm {
         // git('https://github.com/manfer993/portafolio.git','development'){ node -> // is hudson.plugins.git.GitSCM
         //     node / gitConfigName('manfer993')
