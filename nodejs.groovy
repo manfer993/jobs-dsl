@@ -39,9 +39,7 @@ job('Portafolio_deploy_heroku') {
             createFingerprints(false)
             skipDecorate()        
         }
-        shell ("if [[ -n `docker ps -a | grep portafolioDev` ]]; then\
-                docker stop portafolioDev && docker rm portafolioDev;\
-                fi")
+        shell ("sh clear.sh")
         shell('sleep 5')  
         shell('docker run -d -p 8085:80 --name portafolioDev ferman18/nodejs_app_dev:latest')      
     }
