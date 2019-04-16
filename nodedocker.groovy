@@ -25,7 +25,9 @@ job('Build_Nodejs_Project_docker2') {
             createFingerprints(false)
             skipDecorate()        
         }
-        shell('if [[ -n `docker container ls -a | grep portafolioDev` ]]; then docker container stop portafolioDev && docker container rm portafolioDev; fi')
+        shell('if [[ -n `docker container ls -a | grep portafolioDev` ]]; \
+        then docker container stop portafolioDev && docker container rm portafolioDev; \
+        fi')
         shell(sleep 5)  
         shell('docker run -d -p 8085:80 --name portafolioDev ferman18/nodejs_app_dev:${BUILD_NUMBER}')      
     }
