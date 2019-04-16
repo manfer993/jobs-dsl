@@ -18,9 +18,9 @@ job('Build_Nodejs_Project') {
         shell("npm install")
         sonarScanner {
             analysisProperties('''
-            sonar.projectKey=build_NodeJs_App
-            sonar.projectName=build_NodeJs_App
-            sonar.projectVersion=1.0
+            sonar.projectKey=build_NodeJs_App2
+            sonar.projectName=build_NodeJs_App2
+            sonar.projectVersion=0.1
             sonar.sourceEncoding=UTF-8
             sonar.sources=src
             sonar.exclusions=**/node_modules/**,**/*.spec.ts,**/dist/**,**/docs/**,**/*.js,**/e2e/**,**/coverage/**
