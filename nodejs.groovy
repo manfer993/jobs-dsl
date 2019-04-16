@@ -5,6 +5,8 @@ job('Deploy_Nodejs_Project') {
         //     node / gitConfigEmail('manfer93@gmail.com')
         // }
         git(){ 
+            node / gitConfigName('manfer993')
+            node / gitConfigEmail('manfer93@gmail.com')
             remote {
                 name('origin')
                 url('https://github.com/manfer993/portafolio.git')
