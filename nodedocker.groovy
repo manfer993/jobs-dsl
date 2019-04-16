@@ -1,4 +1,4 @@
-job('Build_Nodejs_Project') {
+job('Build_Nodejs_Project_docker2') {
     scm {
         git('https://github.com/manfer993/portafolio.git','development'){ node -> // is hudson.plugins.git.GitSCM
             node / gitConfigName('manfer993')
