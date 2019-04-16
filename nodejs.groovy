@@ -16,8 +16,8 @@ job('Build_Nodejs_Project') {
     steps {
         shell("npm install @angular/cli")
         shell("npm install")
-        executeSonarQubeScanner {
-            AnalysisProperties('''
+        sonarScanner {
+            analysisProperties('''
             sonar.projectKey=build_NodeJs_App
             sonar.projectName=build_NodeJs_App
             sonar.projectVersion=1.0
