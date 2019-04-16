@@ -1,4 +1,5 @@
-job('deploy-app-heroku') {
+job('Portafolio_deploy_heroku') {
+    description('This job generate a image of the app and deploy it in a container and at heroku')
     scm {
         git(){ 
             remote {
@@ -22,6 +23,27 @@ job('deploy-app-heroku') {
     triggers {
         githubPush()        
     }
+    wrappers {
+        nodejs('nodeJS_10.15.3')
+    }
+    steps {
+        shell('npm install @angular/cli')
+        shell('npm install')
+        dockerBuildAndPublish {
+            repositoryName('ferman18/nodejs_app_dev')
+            tag('${BUILD_NUMBER}')
+            registryCredentials('dockerHub')
+            forcePull(false)
+            forceTag(false)
+            createFingerprints(false)
+            skipDecorate()        
+        }
+        shell('if [[ -n `docker container ls -a | grep portafolioDev` ]]; \
+        then docker container stop portafolioDev && docker container rm portafolioDev; \
+        fi')
+        shell('sleep 5')  
+        shell('docker run -d -p 8085:80 --name portafolioDev ferman18/nodejs_app_dev:${BUILD_NUMBER}')      
+    }
     publishers {
         git {
             pushOnlyIfSuccess()
@@ -31,5 +53,18 @@ job('deploy-app-heroku') {
             }
             branch('heroku', 'master')
         }
+    }
+}
+job('Portafolio_backend_test'){
+    description('This job run a test in Postman with Newman')
+    scm {
+        git('https://github.com/manfer993/test-postman-newman.git','*/master')
+    }
+    wrappers {
+        nodejs('nodeJS_10.15.3')
+    }
+    steps {
+        shell('npm install')
+        shell('npm run test')
     }
 }
