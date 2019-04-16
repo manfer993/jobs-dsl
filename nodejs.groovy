@@ -43,7 +43,7 @@ job('Portafolio_deploy_heroku') {
                 docker stop portafolioDev && docker rm portafolioDev;\
                 fi")
         shell('sleep 5')  
-        shell('docker run -d -p 8085:80 --name portafolioDev ferman18/nodejs_app_dev:${BUILD_NUMBER}')      
+        shell('docker run -d -p 8085:80 --name portafolioDev ferman18/nodejs_app_dev:latest')      
     }
     publishers {
         git {
