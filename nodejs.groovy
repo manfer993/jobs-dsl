@@ -2,7 +2,9 @@ job('Deploy_Nodejs_Project') {
     scm {
         git('https://github.com/manfer993/portafolio.git','development'){ node -> // is hudson.plugins.git.GitSCM
             node / gitConfigName('manfer993')
-            node / gitConfigEmail('manfer93@gmail.com') 
+            node / gitConfigEmail('manfer93@gmail.com')
+        }
+        git(){ 
             // remote {
             //     name('origin')
             //     url('https://github.com/manfer993/portafolio.git')
@@ -10,8 +12,9 @@ job('Deploy_Nodejs_Project') {
             remote {
                 name('heroku')
                 url('https://git.heroku.com/ci-node-app.git')
+                credentials('heroku')
             }
-            // branch('*/development')
+            branch('*/development')
         }
     }
     triggers {
@@ -33,7 +36,7 @@ job('Deploy_Nodejs_Project') {
                 message('Release $PIPELINE_VERSION')
                 create()
             }
-            branch('master', 'heroku')
+            branch('heroku', 'master')
         }
     }
 }
