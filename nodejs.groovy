@@ -16,9 +16,8 @@ job('Build_Nodejs_Project') {
     steps {
         shell("npm install @angular/cli")
         shell("npm install")
-        sonarScanner {
-            properties:
-            '''
+        executeSonarQubeScanner {
+            AnalysisProperties('''
             sonar.projectKey=build_NodeJs_App
             sonar.projectName=build_NodeJs_App
             sonar.projectVersion=1.0
@@ -28,7 +27,7 @@ job('Build_Nodejs_Project') {
             sonar.tests=src/app
             sonar.test.inclusions=**/*.spec.ts
             sonar.ts.tslint.configPath=tslint.json
-            '''        
+            ''')        
         }
     }
 }
