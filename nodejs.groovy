@@ -16,8 +16,10 @@ job('Build_Nodejs_Project') {
     steps {
         shell("npm install @angular/cli")
         shell("npm install")
-        sonarScanner {
-            analysisProperties('''
+    }
+    publishers {
+        sonar {
+            additionalProperties('''
             sonar.projectKey=build_NodeJs_App2
             sonar.projectName=build_NodeJs_App2
             sonar.projectVersion=0.1
@@ -28,6 +30,7 @@ job('Build_Nodejs_Project') {
             sonar.test.inclusions=**/*.spec.ts
             sonar.ts.tslint.configPath=tslint.json
             ''')        
+            installationName('nodeJS_10.15.3')
         }
     }
 }
