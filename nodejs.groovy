@@ -1,36 +1,39 @@
-job('Build_Nodejs_Project') {
+job('Deploy_Nodejs_Project') {
     scm {
         git('https://github.com/manfer993/portafolio.git','development'){ node -> // is hudson.plugins.git.GitSCM
             node / gitConfigName('manfer993')
-            node / gitConfigEmail('manfer93@gmail.com')
+            node / gitConfigEmail('manfer93@gmail.com') 
+            // remote {
+            //     name('origin')
+            //     url('https://github.com/manfer993/portafolio.git')
+            // }
+            remote {
+                name('heroku')
+                url('https://git.heroku.com/ci-node-app.git')
+            }
+            // branch('*/development')
         }
     }
     triggers {
         githubPush()
-        scm('H/5 * * * *')
+        // scm('H/5 * * * *')
     }
-    wrappers {
-        nodejs('nodeJS_10.15.3') // this is the name of the NodeJS installation in 
-                         // Manage Jenkins -> Configure Global Tools -> NodeJS Installations -> Name
-    }
-    steps {
-        shell("npm install @angular/cli")
-        shell("npm install")
-    }
+    // wrappers {
+    //     nodejs('nodeJS_10.15.3') // this is the name of the NodeJS installation in 
+    //                      // Manage Jenkins -> Configure Global Tools -> NodeJS Installations -> Name
+    // }
+    // steps {
+    //     shell("npm install @angular/cli")
+    //     shell("npm install")
+    // }
     publishers {
-        sonar {
-            additionalProperties('''
-            sonar.projectKey=build_NodeJs_App2
-            sonar.projectName=build_NodeJs_App2
-            sonar.projectVersion=0.1
-            sonar.sourceEncoding=UTF-8
-            sonar.sources=src
-            sonar.exclusions=**/node_modules/**,**/*.spec.ts,**/dist/**,**/docs/**,**/*.js,**/e2e/**,**/coverage/**
-            sonar.tests=src/app
-            sonar.test.inclusions=**/*.spec.ts
-            sonar.ts.tslint.configPath=tslint.json
-            ''')        
-            installationName('nodeJS_10.15.3')
+        git {
+            pushOnlyIfSuccess()
+            tag('heroku', 'foo-$PIPELINE_VERSION') {
+                message('Release $PIPELINE_VERSION')
+                create()
+            }
+            branch('master', 'heroku')
         }
     }
 }
