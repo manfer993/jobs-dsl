@@ -21,11 +21,11 @@ job('Portafolio_deploy_heroku') {
         }
     }
     triggers {
-        githubPush()        
+        githubPush()
+        scm('H/5 * * * *')        
     }
     wrappers {
         nodejs('nodeJS_10.15.3')
-        scm('H/5 * * * *')
     }
     steps {
         shell('npm install @angular/cli')
