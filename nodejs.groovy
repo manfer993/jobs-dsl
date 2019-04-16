@@ -4,10 +4,10 @@ job('Deploy_Nodejs_Project') {
         //     node / gitConfigName('manfer993')
         //     node / gitConfigEmail('manfer93@gmail.com')
         // }
-        git(){ node -> // is hudson.plugins.git.GitSCM
+        git(){ 
+            remote {node -> // is hudson.plugins.git.GitSCM
             node / gitConfigName('manfer993')
             node / gitConfigEmail('manfer93@gmail.com')
-            remote {
                 name('origin')
                 url('https://github.com/manfer993/portafolio.git')
             }
@@ -17,6 +17,7 @@ job('Deploy_Nodejs_Project') {
                 credentials('heroku')
             }
             branch('*/development')
+            
         }
     }
     triggers {
