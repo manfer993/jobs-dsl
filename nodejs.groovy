@@ -1,12 +1,12 @@
-job('Deploy_Nodejs_Project') {
+job(name: "deploy-app-heroku",
+    description: "update de app into heroku. To be used when have a change in development branch",
+    emails: ["manfer93@example.com"]) {
     scm {
         // git('https://github.com/manfer993/portafolio.git','development'){ node -> // is hudson.plugins.git.GitSCM
         //     node / gitConfigName('manfer993')
         //     node / gitConfigEmail('manfer93@gmail.com')
         // }
         git(){ 
-            node / gitConfigName('manfer993')
-            node / gitConfigEmail('manfer93@gmail.com')
             remote {
                 name('origin')
                 url('https://github.com/manfer993/portafolio.git')
@@ -17,7 +17,12 @@ job('Deploy_Nodejs_Project') {
                 credentials('heroku')
             }
             branch('*/development')
-            
+            configure { node ->
+                node / 'extensions' / 'hudson.plugins.git.extensions.impl.UserIdentity' << { 
+                    name('manfer993') 
+                    email('manfer93@gmail.com') 
+                }
+            }
         }
     }
     triggers {
