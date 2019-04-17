@@ -46,10 +46,6 @@ job('Portafolio_deploy_heroku') {
     publishers {
         git {
             pushOnlyIfSuccess()
-            tag('heroku', 'foo-${BUILD_NUMBER}') {
-                message('Release number ${BUILD_NUMBER}')
-                create()
-            }
             branch('heroku', 'master')
         }
     }
