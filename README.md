@@ -16,25 +16,26 @@ Este proyecto genera mediante codigo en groovy, 2 pipelines y 2 jobs en jenkins
 
 ## Como ejecutar el proyecto
 
-1- Generar una nueva tarea de estilo libre en Jenkins
-2- Configurar el origen del  codigo fuente en Git
-    -- Ingresar la URL del repositorio **https://github.com/manfer993/jobs-dsl.git**
-    -- Especificar la rama del repositorio **/master**
-3- Establecer a Github hook trigger como disparador de ejecuciones
-4- Añadir un paso para ejecutar de tipo **Process Job DSLs**  
-    -- Ingresar el nombre de los DSL scripts que se van a construir **jobNodejsApp.groovy**
-                                                                    **pipelineNodejsApp.groovy**
-                                                                    **pipelineReact.groovy**
-5- Guardar
-6- Construir el proyecto
+1. Generar una nueva tarea de estilo libre en Jenkins.
+2. Configurar el origen del  codigo fuente en Git.
+    - Ingresar la URL del repositorio: **https://github.com/manfer993/jobs-dsl.git**
+    - Especificar la rama del repositorio: **/master**
+3. Establecer a Github hook trigger como disparador de ejecuciones.
+4. Añadir un paso para ejecutar de tipo: **Process Job DSLs**  
+    - Ingresar el nombre de los DSL scripts que se van a construir:
+        - `jobNodejsApp.groovy`
+        - `pipelineNodejsApp.groovy`
+        - `pipelineReact.groovy`
+5. Guardar.
+6. Construir el proyecto.</br>
 
-La primera construcción del proyecto va a fallar puesto que Jenkins necesita que sean aprobados los scripts antes de construirlos 
+La primera construcción del proyecto va a fallar puesto que Jenkins necesita que sean aprobados los scripts antes de construirlos. </br>
 
-7- Ingresar a Manage Jenkins > In-process Script Approval 
-8- Aprobar los 3 Scripts del proyecto
-9- Construir el proyecto nuevamente
+7. Ingresar a Manage Jenkins > In-process Script Approval.
+8. Aprobar los 3 Scripts del proyecto.
+9. Construir el proyecto nuevamente.</br>
 
-Ahora se deben haber generados los 2 nuevos pipelines y los 2 nuevos jobs dentro del workspace de Jenkins
+Ahora se deben haber generados los 2 nuevos pipelines y los 2 nuevos jobs dentro del workspace de Jenkins</br>
 
 |       Project Name       |    Type   |                    Description of the project                    |
 |:------------------------:|:---------:|:----------------------------------------------------------------:|
