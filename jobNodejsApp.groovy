@@ -1,5 +1,5 @@
 job('Portafolio_deploy_heroku') {
-    description('This job generate a image of the app and deploy it in a container and at heroku')
+    description('This job generate a image of the app and deploy it in a container that listen by the port 8085 and at heroku by the ulr http://ci-node-app.herokuapp.com')
     scm {
         git(){ 
             remote {

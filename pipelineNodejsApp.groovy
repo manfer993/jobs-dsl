@@ -1,9 +1,9 @@
 pipelineJob('Portafolio_deploy_docker') {
-    description("Pipeline for nodejs app call Portafolio to deploy on a container")
+    description("Pipeline for nodejs app call Portafolio to deploy on a container that listen by the port 8085")
     triggers {
         githubPush()
         scm('H/5 * * * *')
-    }    
+    }
     definition {
         cpsScm {
             scm {
