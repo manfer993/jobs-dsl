@@ -39,9 +39,9 @@ job('Portafolio_deploy_heroku') {
             createFingerprints(false)
             skipDecorate()        
         }
-        shell ("if docker ps -a | grep portafolioDev; then docker stop portafolioDev && docker rm portafolioDev; fi")
+        shell ("if docker container ls -a | grep portafolioDev; then docker container stop portafolioDev && docker container rm portafolioDev; fi")
         shell('sleep 5')  
-        shell('docker run -d -p 8085:80 --name portafolioDev ferman18/nodejs_app_dev:latest')      
+        shell('docker container run -d -p 8085:80 --name portafolioDev ferman18/nodejs_app_dev:latest')      
     }
     publishers {
         git {
