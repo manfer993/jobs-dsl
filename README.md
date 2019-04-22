@@ -1,6 +1,6 @@
 # Jobs DSL
 
-Este proyecto genera mediante codigo en groovy, pipelines y jobs en jenkins
+Este proyecto genera mediante codigo en groovy, 2 pipelines y 2 jobs en jenkins
 
 ## Plugins de Jenkins necesarios
 
