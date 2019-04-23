@@ -96,6 +96,7 @@ Ahora se deben haber generados los 2 nuevos pipelines y los 2 nuevos jobs dentro
     - Tener credenciales repositorio de Heroku
     - Tener credenciales repositorio de DockerHub
     - Instalar sonar scanner dentro de Jenkins, ruta: `manage jenkins > Global Tool Configuration > SonarQube scanner`.
+    - Configurar SonarQube servers dentro de Jenkins, ruta: `manage jenkins > Configure System > SonarQube servers` ingresando la URL y llave de autenticacion generada en el servidor de SonarQube.  
 - Pasos del Freestyle job:
     - SCM: obtener codigo fuente desde el repositorio de git y heroku, definiendo el remote configurados en el versionamiento de codigo, definicion de usuario y correo para git
     - Triggers: Establecer los push de github como disparador de la construccion.
@@ -133,11 +134,12 @@ sonar.ts.tslint.configPath=tslint.json
 - Url del proyecto: https://github.com/manfer993/simple-node-js-react-npm-app.git
 - Rama del repositorio: `*/master`.
 - Pre-requisitos Jenkins:
-    - Plugins NodeJS, SonarQube Scanner.
     - Tener instalado docker dentro del servidor de Jenkins.
-    - Instalar Nodejs version 10.15.3 dentro de Jenkins, ruta: `manage jenkins > Global Tool Configuration > NodeJS`.
+    - Tener instalado NodeJs dentro del servidor de Jenkins.
 - Pasos del Jobs DSL:
     - Establecer los push de github como disparador de la construccion.
-    - Programar a Jenkins para que consulte cambios en el repositorio cada 5 minutos.
     - Definir el pipeline mediante script dentro del repositorio en el documento `Jenkinsfile`.
 - Pasos del Pipeline dentro del Jenkinsfile:
+    - Build: Construir el proyecto, instalando los modulos del proyecto `npm install`.
+    - Test: Correr las pruebas del proyecto por medio del comando `react-scripts test --env=jsdom`.
+    - Deliver: Desplegar la aplicacion en un ambiente local expuesto por el puerto 300, a la espera de que se pruebe para culminar el pipeline.
